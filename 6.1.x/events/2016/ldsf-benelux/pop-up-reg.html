@@ -1,0 +1,134 @@
+<style>
+#pagePopUp {
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid #CCC;
+        position: absolute;
+        z-index: 100;
+        
+    }
+    .pop-up-content a{
+       text-decoration: underline;
+       font-weight: bold;
+    }
+.pop-up-content {
+ display: none;
+ }
+    #pagePopUp .pop-up-content {
+        display: block;
+        padding: 50px 35px 50px;
+    }
+    
+       #agendaclosePopUp {
+        background: url(/documents/35935946/36204257/close-pop-up.png/98401a14-9fcf-4f9a-8f1d-4fdcb7ff0207?t=1392924953000?t=1392924953000?t=1392924953590) no-repeat;
+        cursor: pointer;
+        float: right;
+        height: 60px;
+        width: 60px;
+    }
+.register-button {
+	cursor: pointer;
+}
+</style><div class="span-left">
+	&nbsp;</div>
+<div class="span-right">
+	<div class="event-title special-font top">
+		Liferay &amp; Valamis</div>
+	<div class="event-title bottom">
+		Digital Solutions Forum</div>
+	<div class="event-subtitle top">
+		Vrij in Culemborg</div>
+	<div class="event-subtitle">
+		<span style="line-height: 1.4;">Beusichemsedijk 17</span></div>
+	<div class="event-subtitle">
+		<span style="line-height: 1.4;">4101 NV Culemborg</span></div>
+	<div class="event-subtitle">
+		<span style="line-height: 1.4;">Netherlands</span></div>
+	<div class="event-subtitle">
+		March 17th, 2016</div>
+		
+	<div class="register-button pop-up">
+	<div class="pop-up-content" id="regpopup"><p>Thank you for your interest in the Liferay &amp; Valamis Digital Solutions Forum.</p>
+	<p>For registration please contact <a href="mailto:Yvette.hooijmans@liferay.com">Yvette Hooijmans</a> <a href="tel:+31853033491">+31 (0) 853033491</a></p></div>
+		<a class="btn">Register</a></div>
+</div>
+
+<script>
+		 				
+	
+AUI().ready(
+	'node',
+	function(A) {
+		var pagePopUp = A.one('#pagePopUp');
+
+		if (!pagePopUp) {
+			A.one('#wrapper').append('<div class="aui-helper-hidden" id="pagePopUp"><div id="agendaclosePopUp"></div></div>')
+
+			pagePopUp = A.one('#pagePopUp');
+		};
+
+		var copyToPopUp = function(event) {
+			var newPopUpContent = A.one('#regpopup');
+
+			var oldPopUpContent = pagePopUp.one('.pop-up-content');
+
+			if (!newPopUpContent) {
+				return
+			}
+
+			if (oldPopUpContent) {
+				oldPopUpContent.remove();
+			}
+
+			event.stopPropagation();
+
+			pagePopUp.append(newPopUpContent.cloneNode(true));
+
+			pagePopUp.removeClass('aui-helper-hidden');
+
+			var popUpContent = pagePopUp.one('.pop-up-content')
+
+			popUpContent.on(
+				'clickoutside',
+				function(event) {
+					pagePopUp.addClass('aui-helper-hidden');
+
+					popUpContent.detach('clickoutside');
+				}
+			);
+		};
+
+		var WIN = A.getWin();
+
+		var centerOnPage = function(node) {
+			var currentScrollPos = WIN.get('docScrollY');
+
+			var winHeight = WIN.get('innerHeight');
+
+			if (winHeight == undefined) {
+				winHeight = document.documentElement.clientHeight;
+			}
+
+			var contentWidth = A.one('#content').get('clientWidth');
+
+			var nodeHeight = node.get('clientHeight');
+			var nodeWidth = node.get('clientWidth');
+
+			xCenter = (contentWidth / 2) - (nodeWidth / 2);
+			yCenter = ((winHeight / 2) - (nodeHeight / 2)) + currentScrollPos;
+
+			node.setStyle('right', xCenter);
+			node.setStyle('top', yCenter);
+		};
+
+		A.all('.pop-up').on(
+			'click',
+			function(event) {
+				copyToPopUp(event);
+
+				centerOnPage(pagePopUp);
+			}
+		);
+	}
+);
+</script>
+

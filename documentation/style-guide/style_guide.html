@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<head>
+	<title>
+		Liferay.com Style Guide
+	</title>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="http://webteam.liferay.com/osb-community-theme/css/main.css" rel="stylesheet" type="text/css">
+
+	<script>
+		(function(d) {
+			var config = {
+			kitId: 'see0ypk',
+			scriptTimeout: 3000
+			},
+			h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='//use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+			}
+		)(document);
+	</script>
+
+	<style>
+		body {
+			font-family: 'Myriad Pro';
+			margin: 2em auto;
+			max-width: 1200px;
+			min-width: 320px;
+		}
+
+		#pageNavigation {
+			background: #EFEFEF;
+			border: 1px solid #BFBFBF;
+			padding: 1em;
+			position: fixed;
+			left: 0;
+		}
+
+		#pageNavigation li {
+			list-style: none;
+		}
+
+		#pageNavigation a {
+			color: #4C4C4E;
+		}
+
+		#pageNavigation a:hover {
+			color: #F49B45;
+		}
+
+		#toggleGoTo {
+			display: none;
+			font-weight: bold;
+			margin-top: .5em;
+		}
+
+		.break {
+			border-bottom: 1px solid #4C4C4E;
+			margin: .5em 0;
+			height: 1px;
+		}
+
+		.color-block, .example-block {
+			display: inline-block;
+			padding: .5em;
+			margin: .5em;
+		}
+
+		.color-block {
+			color: #FFF;
+			display: inline-block;
+			height: 14em;
+			width: 14em;
+		}
+
+		.example-block {
+			border:1px solid #1C75B9;
+			max-width: 10em;
+		}
+
+		.go-to {
+			display: none;
+			font-size: 15px;
+			text-decoration: none;
+		}
+
+		.show-go-to .go-to {
+			display: inline;
+		}
+
+		.style-details {
+			background: #DFDFDF;
+			padding: .5em;
+		}
+
+		.style-heading {
+			border-bottom: 1px solid #dfdfdf;
+			padding-bottom: .5em;
+		}
+
+		.style-item {
+			border: 1px solid #DFDFDF;
+			margin: 1em auto;
+			padding: 1em;
+			vertical-align: top;
+			max-width: 960px;
+		}
+
+		.style-section {
+			background: #FFF;
+			margin: 2em 0;
+		}
+
+		.text-info {
+			color: #919697;
+		}
+	</style>
+
+	<script src="http://cdn.alloyui.com/2.0.0/aui/aui-min.js"></script>
+	<script>
+		YUI().use(
+			'anim',
+			'aui-node',
+			function(A) {
+				A.all('.animate-scroll').on(
+					'click',
+					function(event) {
+						event.preventDefault();
+
+						var node = event.currentTarget;
+
+						var section = A.one(node.get('hash'));
+
+						var offset = parseInt(node.attr('data-offset'));
+
+						var scrollTo = parseInt(section.getY());
+
+						if (offset) {
+							scrollTo -= offset;
+						}
+
+						new A.Anim(
+							{
+								duration: 0.5,
+								easing: 'easeBoth',
+								node: 'win',
+								to: {
+									scroll: [0, scrollTo]
+								}
+							}
+						).run();
+					}
+				);
+
+				A.one('#toggleGoTo').on(
+					'click',
+					function(event) {
+						A.one('body').toggleClass('show-go-to');
+					}
+				);
+			}
+		);
+	</script>
+</head>
+<body class="show-go-to">
+	<h1 class="page-heading">Liferay.com Style Guide</h1>
+
+	<ul id="pageNavigation">
+		<li><strong>Elements:</strong></li>
+		<li><a class="animate-scroll" href="#baseElementsSection">Base Elements</a></li>
+		<li><a class="animate-scroll" href="#buttonSection">Buttons</a></li>
+		<li><a class="animate-scroll" href="#formSection">Forms</a></li>
+		<li><a class="animate-scroll" href="#headingSection">Headings</a></li>
+		<li><a class="animate-scroll" href="#navSection">Navs</a></li>
+		<li><a class="animate-scroll" href="#tableSection">Tables</a></li>
+		<li><div class="break"></div></li>
+		<li><strong>CSS Modules:</strong></li>
+		<li><a class="animate-scroll" href="#bannersModule">Banners</a></li>
+		<li><a class="animate-scroll" href="#ctaModule">CTA Navigation Boxes</a></li>
+		<li><a class="animate-scroll" href="#infoModule">Info Block</a></li>
+		<li><a class="animate-scroll" href="#linkTileModule">Link Tile</a></li>
+		<li><a class="animate-scroll" href="#logosModule">Logos</a></li>
+		<li><a class="animate-scroll" href="#mediaObjModule">Media Object</a></li>
+		<li><a class="animate-scroll" href="#panelModule">Panels</a></li>
+		<li><a class="animate-scroll" href="#selectionNavModule">Selection Nav</a></li>
+		<li><a class="animate-scroll" href="#statsGraphicModule">Stats Graphic</a></li>
+		<li><a class="animate-scroll" href="#quoteModule">Quote Section</a></li>
+		<li><a class="animate-scroll" href="#transitionsModule">Transitions</a></li>
+		<li><div class="break"></div></li>
+		<li><strong>Javascript Modules:</strong></li>
+		<li><a class="animate-scroll" href="#carouselModule">Carousel</a></li>
+		<li><a class="animate-scroll" href="#faqModule">FAQ</a></li>
+		<li><a class="animate-scroll" href="#parallaxModule">Parallax</a></li>
+		<li><a class="animate-scroll" href="#popUpModule">Pop-ups</a></li>
+
+		<li class="aui-helper-hidden hide" id="toggleGoTo"><a>Toggle Arrows</a></li>
+	</ul>
+
+	<div id="baseElementsSection" class="style-section">
+		<h2 class="style-heading">Base Elements</h2>
+
+		<div class="style-item">
+			<h3 class="style-title">
+				Anchors
+			</h3>
+
+			<ul class="text-info">
+				<li>normal state</li>
+				<li>hover</li>
+				<li>focused</li>
+				<li>visited</li>
+			</ul>
+
+			<div class="style-example">
+				<a href="javascript:;">Click Me</a>
+			</div>
+
+			<pre>
+&lt;a href="javascript:;" name="Link Name"&gt;Click Me&lt;/a&gt;
+			</pre>
+		</div>
+
+		<div class="style-item">
+			<h3 class="style-title">
+				Colors
+			</h3>
+
+			<div class="text-info">
+				Main color palette for liferay.com
+			</div>
+
+			<div class="style-example" style="text-align: center;">
+				<div class="color-block primary-background" style="background:#1C75B9;">
+					<b>Primary Color</b>
+					<p>.primary-background</p>
+					<p>.primary-border</p>
+					<p>.primary-color</p>
+					<p>#1C75B9</p>
+					<p>28,117,185</p>
+				</div>
+
+				<div class="color-block alt-primary-background" style="background:#005B96;">
+					<b>Alt Primary Color</b>
+					<p>.alt-primary-background</p>
+					<p>.alt-primary-border</p>
+					<p>.alt-primary-color</p>
+					<p>#005B96</p>
+					<p>0,91,150</p>
+				</div>
+
+				<div class="color-block secondary-background" style="background:#124680;">
+					<b>Secondary Color</b>
+					<p>.secondary-background</p>
+					<p>.secondary-border</p>
+					<p>.secondary-color</p>
+					<p>#124680</p>
+					<p>18,70,128</p>
+				</div>
+
+				<div class="color-block alt-secondary-background" style="background:#1B3A6A;">
+					<b>Alt Secondary Color</b>
+					<p>.alt-secondary-background</p>
+					<p>.alt-secondary-border</p>
+					<p>.alt-secondary-color</p>
+					<p>#1B3A6A</p>
+					<p>27,58,106</p>
+				</div>
+
+				<div class="color-block complementary-background" style="background:#F5A11D;">
+					<b>Complementary Color</b>
+					<p>.complementary-background</p>
+					<p>.complementary-border</p>
+					<p>.complementary-color</p>
+					<p>#F5A11D</p>
+					<p>245,161,29</p>
+				</div>
+
+				<div class="color-block accent-background" style="background:#00B8B9;">
+					<b>Accent Color</b>
+					<p>.accent-background</p>
+					<p>.accent-border</p>
+					<p>.accent-color</p>
+					<p>#00B8B9</p>
+					<p>0,184,185</p>
+				</div>
+
+				<div class="color-block element-background font-color font-border" style="background:#E3E4E5; border: 1px solid #4C4C4E; color:#4C4C4E;">
+					<b>Element Color</b>
+					<p>.element-background</p>
+					<p>.element-border</p>
+					<p>.element-color</p>
+					<p>#E3E4E5</p>
+					<p>227,228,229</p>
+				</div>
+
+				<div class="color-block light-background font-color font-border" style="background:#FFF; border: 1px solid #4C4C4E; color:#4C4C4E;">
+					<b>Light Color</b>
+					<p>.light-background</p>
+					<p>.light-border</p>
+					<p>.light-color</p>
+					<p>#FFF</p>
+					<p>0,0,0</p>
+				</div>
+
+				<div class="color-block font-background" style="background:#4C4C4E">
+					<b>Font Color</b>
+					<p>.font-background</p>
+					<p>.font-border</p>
+					<p>.font-color</p>
+					<p>#4C4C4E</p>
+					<p>71,74,75</p>
+				</div>
+
+				<div class="color-block alt-font-background" style="background:#909295">
+					<b>Alt Font Color</b>
+					<p>.alt-font-background</p>
+					<p>.alt-font-border</p>
+					<p>.alt-font-color</p>
+					<p>#909295</p>
+					<p>144,146,149</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="style-item">
+			<h3 class="style-title">
+				Lists
+			</h3>
+
+			<div class="text-info">
+				Unordered and ordered lists
+			</div>
+
+			<div class="style-example">
+				<ul>
+					<li>item 1</li>
+					<li>item 2</li>
+					<li>item 3</li>
+					<li>item 4</li>
+				</ul>
+				<ol>
+					<li>item 1</li>
+					<li>item 2</li>
+					<li>item 3</li>
+					<li>item 4</li>
+				</ol>
+			</div>
+
+			<pre>
+&lt;ul&gt;
+	&lt;li&gt;item 1&lt;/li&gt;
+	&lt;li&gt;item 2&lt;/li&gt;
+	&lt;li&gt;item 3&lt;/li&gt;
+	&lt;li&gt;item 4&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+	&lt;li&gt;item 1&lt;/li&gt;
+	&lt;li&gt;item 2&lt;/li&gt;
+	&lt;li&gt;item 3&lt;/li&gt;
+	&lt;li&gt;item 4&lt;/li&gt;
+&lt;/ol&gt;
+			</pre>
+		</div>
+
+		<div class="style-item">
+			<h3 class="style-title">
+				Margin and Padding
+			</h3>
+
+			<div class="text-info">
+				Default margin, padding, and commonly used widths for desktop, tablet, and mobile devices.
+			</div>
+
+			<div class="style-example">
+				<div class="example-block">
+					Here is the content in the block. It should have the perfect amount of padding and margin to look beautiful in every language and at every width.
+				</div>
+
+				<div class="example-block">
+					Here is the content in the block. It should have the perfect amount of padding and margin to look beautiful in every language and at every width.
+				</div>
+
+				<div class="example-block">
+					Here is the content in the block. It should have the perfect amount of padding and margin to look beautiful in every language and at every width.
+				</div>
+			</div>
+
+			<pre>
+&lt;div class="example-block"&gt;
+	Here is the content in the block. It should have the perfect amount of padding and margin to look beautiful in every language and at every width.
+&lt;/div&gt;
+
+&lt;div class="example-block"&gt;
+	Here is the content in the block. It should have the perfect amount of padding and margin to look beautiful in every language and at every width.
+&lt;/div&gt;
+
+&lt;div class="example-block"&gt;
+	Here is the content in the block. It should have the perfect amount of padding and margin to look beautiful in every language and at every width.
+&lt;/div&gt;
+			</pre>
+		</div>
+
+		<div class="style-item">
+			<h3 class="style-title">
+				Paragraphs
+			</h3>
+
+			<div class="text-info">
+				Default paragraph spacing and line height, with consideration for Asian character height (especially on mobile devices).
+			</div>
+
+			<div class="style-example">
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam elementum nulla id nisl hendrerit pellentesque. Sed vel purus id nunc fermentum consequat in cursus mi. Suspendisse bibendum gravida turpis, eget vehicula lacus iaculis eu.</p>
+				<p>Donec consectetur malesuada dolor, nec congue magna viverra vitae. Aliquam accumsan justo tortor, sit amet sagittis elit pellentesque sit amet. Ut ut tellus sit amet mauris auctor feugiat sit amet ac nisi.</p>
+			</div>
+
+			<pre>
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam elementum nulla id nisl hendrerit pellentesque. Sed vel purus id nunc fermentum consequat in cursus mi. Suspendisse bibendum gravida turpis, eget vehicula lacus iaculis eu.&lt;/p&gt;
+
+&lt;p&gt;Donec consectetur malesuada dolor, nec congue magna viverra vitae. Aliquam accumsan justo tortor, sit amet sagittis elit pellentesque sit amet. Ut ut tellus sit amet mauris auctor feugiat sit amet ac nisi.&lt;/p&gt;
+			</pre>
+		</div>
+
+	</div>
+
+	<div class="style-section" id="buttonSection">
+		<h2 class="style-heading">Buttons</h2>
+
+		<div class="style-item">
+			<h3 class="style-title">
+				Button Colors
+			</h3>
+
+			<div class="text-info">
+				<p>These are eight available colors for buttons, named by their respective colors to match the scheme of a given page.</p>
+				<p>Default button is the most prevalent type of buttons in primary color.</p>
+				<p>Complementary button is designed to highlight important actions such as download.</p>
+				<p>Dark button is intended for placement on banners with a light or pale background.</p>
+				<p>Light button is intended for placement on banners with a dark background.</p>
+			</div>
+
+			<div class="style-example">
+				<a href="javascript:;" class="btn">Default Button</a>
+				<a href="javascript:;" class="btn btn-accent">Accent Button</a>
+				<a href="javascript:;" class="btn btn-complementary">Complementary Button</a>
+				<a href="javascript:;" class="btn btn-alt-primary">Alt Primary Button</a>
+				<a href="javascript:;" class="btn btn-secondary">Secondary Button</a>
+				<a href="javascript:;" class="btn btn-alt-secondary">Alt Secondary Button</a>
+				<a href="javascript:;" class="btn btn-dark">Dark Button</a>
+				<a href="javascript:;" class="btn btn-light">Light Button</a>
+			</div>
+
+			<pre>
+&lt;a href="javascript:;" class="btn"&gt;Default Button&lt;/a&gt;
+&lt;a href="javascript:;" class="btn btn-accent"&gt;Accent Button&lt;/a&gt;
+&lt;a href="javascript:;" class="btn btn-complementary"&gt;Complementary Button&lt;/a&gt;
+&lt;a href="javascript:;" class="btn btn-primary"&gt;Primary Button&lt;/a&gt;
+&lt;a href="javascript:;" class="btn btn-alt-primary"&gt;Primary Button&lt;/a&gt;
+&lt;a href="javascript:;" class="btn btn-secondary"&gt;Primary Button&lt;/a&gt;
+&lt;a href="javascript:;" class="btn btn-alt-secondary"&gt;Primary Button&lt;/a&gt;
+&lt;a href="javascript:;" class="btn btn-dark"&gt;Dark Button&lt;/a&gt;
+&lt;a href="javascript:;" class="btn btn-light"&gt;Light Button&lt;/a&gt;
+			</pre>
+		</div>
+
+		<div class="style-item">
+			<h3 class="style-title">
+				Button Sizes
+			</h3>
+
+			<div class="text-info">
+				There are three available button sizes: large, default, and small.
+			</div>
+
+			<div class="style-example">
+				<a href="javascript:;" class="btn btn-lg">Default Large</a>
+				<a href="javascript:;" class="btn">Default</a>
+				<a href="javascript:;" class="btn btn-sm">Default Small</a>
+			</div>
+
+			<pre>
+&lt;a href="javascript:;" class="btn btn-lg"&gt;Default Large&lt;/a&gt;
+&lt;a href="javascript:;" class="btn"&gt;Default&lt;/a&gt;
+&lt;a href="javascript:;" class="btn btn-sm"&gt;Default Small&lt;/a&gt;
+			</pre>
+		</div>
+	</div>
+
+	<div class="style-section" id="formSection">
+		<h2 class="style-heading">Forms</h2>
+
+		<div class="style-item">
+			<h3 class="style-title">
+				Form Styling
+			</h3>
+
+			<ul class="text-info">
+				<li>default form elements</li>
+				<li>focused state</li>
+				<li>field filled/checked</li>
+				<li>field with error</li>
+				<li>required field</li>
+				<li>dropdown styling</li>
+			</ul>
+
+			<div class="style-example">
+				<form class="lrdcom-form">
+					<input class="field hide" type="hidden" name="tactic_id" value="">
+					<fieldset>
+						<div class="field-text field-wrapper required">
+							<label>First Name</label>
+							<input class="field" name="firstname" required type="text" aria-required="true" value="">
+						</div>
+
+						<div class="field-text field-wrapper required">
+							<label>Last Name</label>
+							<input class="field" name="lastname" required type="text" aria-required="true" value="">
+						</div>
+
+						<div class="field-radio field-wrapper">
+							<label>Gender</label>
+							<div clas="field">
+								<label>
+									<input checked class="field" name="gender" type="radio" value="Male">
+									<span>Male</span>
+								</label>
+								<label>
+									<input class="field" name="gender" type="radio" value="Female">
+									<span>Female</span>
+								</label>
+							</div>
+						</div>
+
+						<div class="field-checkbox field-wrapper">
+							<label>
+								<input class="field" name="item1" type="checkbox" value="item 1">
+								<span>Checkbox</span>
+							</label>
+						</div>
+
+						<div class="field-checkbox field-wrapper">
+							<label>Checkboxes</label>
+							<label>
+								<input class="field" name="item1" type="checkbox" value="item 1">
+								<span>Item 1</span>
+							</label>
+							<label>
+								<input checked class="field" name="item2" type="checkbox" value="item 2">
+								<span>Item 2</span>
+							</label>
+							<label >
+								<input checked class="field" name="item3" type="checkbox" value="item 3">
+								<span>Item 3</span>
+							</label>
+						</div>
+
+						<div class="field-select field-wrapper">
+							<label>Select</label>
+							<select class="field">
+								<option value="">Items</option>
+								<option value="item1">item 1</option>
+								<option value="item2">item 2</option>
+								<option value="item3">item 3</option>
+							</select>
+						</div>
+
+						<div class="field-multi-select field-wrapper">
+							<label>Multi Select</label>
+							<select class="field" multiple>
+								<option value="item1">item 1</option>
+								<option value="item2">item 2</option>
+								<option value="item3">item 3</option>
+							</select>
+						</div>
+
+						<div class="field-textarea field-wrapper">
+							<label>Textarea</label>
+							<textarea class="field"></textarea>
+						</div>
+					</fieldset>
+
+					<input class="btn" type="submit" value="Submit">
+				</form>
+			</div>
+
+			<pre>
+&lt;form class="lrdcom-form"&gt;
+	&lt;input class="field hide" type="hidden" name="tactic_id" value=""&gt;
+	&lt;fieldset&gt;
+		&lt;div class="field-text field-wrapper required"&gt;
+			&lt;label&gt;First Name&lt;/label&gt;
+			&lt;input class="field" name="firstname" required type="text" aria-required="true" value=""&gt;
+		&lt;/div&gt;
+
+		&lt;div class="field-text field-wrapper required"&gt;
+			&lt;label&gt;Last Name&lt;/label&gt;
+			&lt;input class="field" name="lastname" required type="text" aria-required="true" value=""&gt;
+		&lt;/div&gt;
+
+		&lt;div class="field-radio field-wrapper"&gt;
+			&lt;label&gt;Gender&lt;/label&gt;
+			&lt;div clas="field"&gt;
+				&lt;label&gt;
+					&lt;input checked name="male" type="radio" value="Male"&gt;
+					&lt;span&gt;Male&lt;/span&gt;
+				&lt;/label&gt;
+				&lt;label&gt;
+					&lt;input name="female" type="radio" value="Female"&gt;
+					&lt;span&gt;Female&lt;/span&gt;
+				&lt;/label&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+
+		&lt;div class="field-checkbox field-wrapper"&gt;
+			&lt;label&gt;
+				&lt;input name="item1" type="checkbox" value="item 1"&gt;
+				&lt;span&gt;Checkbox&lt;/span&gt;
+			&lt;/label&gt;
+		&lt;/div&gt;
+
+		&lt;div class="field-checkbox field-wrapper"&gt;
+			&lt;label&gt;Checkboxes&lt;/label&gt;
+			&lt;label&gt;
+				&lt;input name="item1" type="checkbox" value="item 1"&gt;
+				&lt;span&gt;Item 1&lt;/span&gt;
+			&lt;/label&gt;
+			&lt;label class="aui-field-label"&gt;
+				&lt;input checked name="item2" type="checkbox" value="item 2"&gt;
+				&lt;span&gt;Item 2&lt;/span&gt;
+			&lt;/label&gt;
+			&lt;label class="aui-field-label"&gt;
+				&lt;input checked name="item3" type="checkbox" value="item 3"&gt;
+				&lt;span&gt;Item 3&lt;/span&gt;
+			&lt;/label&gt;
+		&lt;/div&gt;
+
+		&lt;div class="field-select field-wrapper"&gt;
+			&lt;label&gt;Select&lt;/label&gt;
+			&lt;select&gt;
+				&lt;option value=""&gt;Items&lt;/option&gt;
+				&lt;option value="item1"&gt;item 1&lt;/option&gt;
+				&lt;option value="item2"&gt;item 2&lt;/option&gt;
+				&lt;option value="item3"&gt;item 3&lt;/option&gt;
+			&lt;/select&gt;
+		&lt;/div&gt;
+
+		&lt;div class="field-multi-select field-wrapper"&gt;
+			&lt;label&gt;Multi Select&lt;/label&gt;
+			&lt;select multiple&gt;
+				&lt;option value="item1"&gt;item 1&lt;/option&gt;
+				&lt;option value="item2"&gt;item 2&lt;/option&gt;
+				&lt;option value="item3"&gt;item 3&lt;/option&gt;
+			&lt;/select&gt;
+		&lt;/div&gt;
+
+		&lt;div class="field-textarea field-wrapper"&gt;
+			&lt;label&gt;Textarea&lt;/label&gt;
+			&lt;textarea/&gt;
+		&lt;/div&gt;
+	&lt;/fieldset&gt;
+
+	&lt;input class="btn" type="submit" value="Submit"&gt;
+&lt;/form&gt;
+			</pre>
+		</div>
+	</div>
+
+	<div class="style-section" id="headingSection">
+		<h2 class="style-heading">Headings</h2>
+
+		<div class="style-item">
+			<h3 class="style-title">
+				Heading Sizes
+			</h3>
+
+			<div class="text-info">
+				These are the most frequently used heading sizes. Decide on line height, letter spacing (if any), and color.
+			</div>
+
+			<div class="style-example">
+				<h1>Heading h1</h1>
+				<h2>Heading h2</h2>
+				<h3>Heading h3</h3>
+				<h4>Heading h4</h4>
+			</div>
+
+			<pre>
+&lt;h1&gt;Heading h1&lt;/h1&gt;
+&lt;h2&gt;Heading h2&lt;/h2&gt;
+&lt;h3&gt;Heading h3&lt;/h3&gt;
+&lt;h4&gt;Heading h4&lt;/h4&gt;
+			</pre>
+		</div>
+
+		<div class="style-item">
+			<h3 class="style-title">
+				Heading Variations
+			</h3>
+
+			<div class="text-info">
+				These are variations for headings. Default heading serves as the main heading on the page. Section headings can be used for separating each section. Finally, light headings are for headings used against dark backdrops.
+			</div>
+
+			<div class="style-example">
+				<h2>Default Heading</h2>
+
+				<div class="section-heading">
+					<h2>Section Heading</h2>
+					<p>Sub heading</p>
+				</div>
+
+				<h2 class="light-heading">Light Heading</h2>
+			</div>
+
+			<pre>
+&lt;h2&gt;Default Heading&lt;/h2&gt;
+
+&lt;div class="section-heading"&gt;
+	&lt;h2&gt;Section Heading&lt;/h2&gt;
+	&lt;p&gt;Sub heading&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;h2 class="light-heading"&gt;Light Heading&lt;/h2&gt;
+			</pre>
+		</div>
+	</div>
+
+	<div class="style-section" id="navSection">
+		<h2 class="style-heading">Navs</h2>
+
+		<div class="style-item">
+			<h3 class="style-title">
+				Tab Navigation
+			</h3>
+
+			<div class="text-info">
+				On page navigation in tab form, this is the default bootstrap style.
+			</div>
+
+			<div class="style-example">
+				<ul class="nav nav-tabs">
+					<li role="presentation" class="active"><a href="javascript:;">Home</a></li>
+					<li role="presentation"><a href="javascript:;">Profile</a></li>
+					<li role="presentation"><a href="javascript:;">Messages</a></li>
+				</ul>
+			</div>
+
+			<pre>
+&lt;ul class="nav nav-tabs"&gt;
+	&lt;li role="presentation" class="active"&gt;&lt;a href="javascript:;"&gt;Home&lt;/a&gt;&lt;/li&gt;
+	&lt;li role="presentation"&gt;&lt;a href="javascript:;"&gt;Profile&lt;/a&gt;&lt;/li&gt;
+	&lt;li role="presentation"&gt;&lt;a href="javascript:;"&gt;Messages&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+			</pre>
+		</div>
+	</div>
+
+	<div class="style-section" id="tableSection">
+		<h2 class="style-heading">Tables</h2>
+
+		<div class="style-item">
+			<h3 class="style-title">
+				Table Styling
+			</h3>
+
+			<div class="text-info">
+				Default table styling. Would be helpful to think about how to handle tables on mobile devices.
+			</div>
+
+			<div class="style-example">
+				<table class="table">
+					<tr class="header-row">
+						<th class="col-1 first-col">TH</th>
+						<th class="col-2">TH</th>
+						<th class="col-3">TH</th>
+						<th class="col-4 last-col">TH</th>
+					</tr>
+
+					<tr>
+						<td class="col-1 first-col">TD</td>
+						<td class="col-2">TD</td>
+						<td class="col-3">TD</td>
+						<td class="col-4 last-col">TD</td>
+					</tr>
+				</table>
+			</div>
+
+			<pre>
+&lt;table class="table"&gt;
+	&lt;tr class="header-row"&gt;
+		&lt;th class="col-1 first-col"&gt;TH&lt;/th&gt;
+		&lt;th&gt;TH class="col-2"&lt;/th&gt;
+		&lt;th&gt;TH class="col-3"&lt;/th&gt;
+		&lt;th&gt;TH class="col-4 last-col"&lt;/th&gt;
+	&lt;/tr&gt;
+
+	&lt;tr&gt;
+		&lt;td class="col-1 first-col"&gt;TD&lt;/td&gt;
+		&lt;td&gt;TD class="col-2"&lt;/td&gt;
+		&lt;td&gt;TD class="col-3"&lt;/td&gt;
+		&lt;td&gt;TD class="col-4 last-col"&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+			</pre>
+		</div>
+	</div>
+
+	<div class="style-section">
+		<h2 class="style-heading">Modules (CSS)</h2>
+
+		<div class="style-item" id="bannersModule">
+			<h3 class="style-title">
+				Banners
+			</h3>
+
+			<ul class="text-info">
+				<li>video banner with text</li>
+				<li>image banner with triangle</li>
+				<li>carousel banner <small>hopefully not</small></li>
+			</ul>
+
+			<div class="style-example"></div>
+
+			<pre></pre>
+		</div>
+
+		<div class="style-item" id="ctaModule">
+			<h3 class="style-title">
+				CTA Navigation Boxes
+			</h3>
+
+			<div class="text-info">
+				<p>example: <a href="https://www.liferay.com/">homepage</a> CTA boxes that link to all the solution pages</p>
+
+				<p>This module could use a more descriptive name</p>
+			</div>
+
+			<div class="style-example"></div>
+
+			<pre></pre>
+		</div>
+
+		<div class="style-item" id="linkTileModule">
+			<h3 class="style-title">
+				Link Tiles
+			</h3>
+
+			<ul class="text-info">
+				These are tiles used to link to pages. example: <a href="https://www.liferay.com/products/liferay-portal/stories">Case Studies</a>
+			</ul>
+
+			<div class="style-example">
+				<div class="link-tile" style="max-width: 300px;">
+					<a class="lazy-load"  data-src="http://www.liferay.com/documents/14/48397686/allianz.png/f7b46f76-7c29-444a-a05e-7f6cefb58c77" href="http://www.liferay.com/products/liferay-portal/stories/allianz-insurance" label="Allianz Insurance" style="background-image: url(http://www.liferay.com/documents/14/48397686/allianz.png/f7b46f76-7c29-444a-a05e-7f6cefb58c77);">
+						<span>Customer-driven online portfolios put Allianz ahead of the pack.</span>
+					</a>
+				</div>
+			</div>
+
+			<pre>
+&lt;div class="link-tile" style="max-width: 300px;"&gt;
+	&lt;a class="lazy-load"  data-src="http://www.liferay.com/documents/14/48397686/allianz.png/f7b46f76-7c29-444a-a05e-7f6cefb58c77" href="http://www.liferay.com/products/liferay-portal/stories/allianz-insurance" label="Allianz Insurance" style="background-image: url(http://www.liferay.com/documents/14/48397686/allianz.png/f7b46f76-7c29-444a-a05e-7f6cefb58c77);"&gt;
+		&lt;span&gt;Customer-driven online portfolios put Allianz ahead of the pack.&lt;/span&gt;
+	&lt;/a&gt;
+&lt;/div&gt;
+			</pre>
+		</div>
+
+		<div class="style-item" id="logosModule">
+			<h3 class="style-title">
+				Logos/Sponsors
+			</h3>
+
+			<ul class="text-info">
+				<li>svg fallbacks</li>
+				<li>animation</li>
+				<li>hover state?</li>
+			</ul>
+
+			<div class="style-example">
+				<div class="logo on-screen-helper slide-up svg">
+					<svg xmlns="http://www.w3.org/2000/svg">
+						<circle cx="30" cy="30" r="30" fill="green" />
+					</svg>
+				</div>
+			</div>
+
+			<pre>
+&lt;div class="logo on-screen-helper slide-up svg"&gt;
+	&lt;svg xmlns="http://www.w3.org/2000/svg"&gt;
+		&lt;circle cx="30" cy="30" r="30" fill="green" /&gt;
+	&lt;/svg&gt;
+&lt;/div&gt;
+			</pre>
+		</div>
+
+		<div class="style-item" id="mediaObjModule">
+			<h3 class="style-title">
+				Media Objects
+			</h3>
+
+
+			<div class="text-info">
+				This module allows media objects (typically images) to be displayed along with headings and/or text.
+			</div>
+
+			<div class="style-example">
+				<div class="block-container media">
+					<div class="block media-object w20">
+						<svg class="primary-color secondary-background svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" stroke="#909295" fill="#E3E4E5">
+							<circle cx="50%" cy="50%" r="25%" />
+						</svg>
+					</div>
+
+					<p class="block media-body w80">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam elementum nulla id nisl hendrerit pellentesque. Sed vel purus id nunc fermentum consequat in cursus mi. Suspendisse bibendum gravida turpis, eget vehicula lacus iaculis eu. Donec consectetur malesuada dolor, nec congue magna viverra vitae. Aliquam accumsan justo tortor, sit amet sagittis elit pellentesque sit amet. Ut ut tellus sit amet mauris auctor feugiat sit amet ac nisi.
+					</p>
+				</div>
+
+				<div class="block-container media">
+					<p class="block media-body w80">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam elementum nulla id nisl hendrerit pellentesque. Sed vel purus id nunc fermentum consequat in cursus mi. Suspendisse bibendum gravida turpis, eget vehicula lacus iaculis eu. Donec consectetur malesuada dolor, nec congue magna viverra vitae. Aliquam accumsan justo tortor, sit amet sagittis elit pellentesque sit amet. Ut ut tellus sit amet mauris auctor feugiat sit amet ac nisi.
+					</p>
+
+					<div class="block media-object w20">
+						<svg class="primary-color secondary-background svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" stroke="#909295" fill="#E3E4E5">
+							<circle cx="50%" cy="50%" r="25%" />
+						</svg>
+					</div>
+				</div>
+			</div>
+
+			<pre>
+&lt;div class="block-container media"&gt;
+	&lt;div class="block media-object w20"&gt;
+		&lt;svg class="primary-color secondary-background svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" stroke="#909295" fill="#E3E4E5"&gt;
+			&lt;circle cx="50%" cy="50%" r="25%" /&gt;
+		&lt;/svg&gt;
+	&lt;/div&gt;
+
+	&lt;p class="block media-body w80"&gt;
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam elementum nulla id nisl hendrerit pellentesque. Sed vel purus id nunc fermentum consequat in cursus mi. Suspendisse bibendum gravida turpis, eget vehicula lacus iaculis eu. Donec consectetur malesuada dolor, nec congue magna viverra vitae. Aliquam accumsan justo tortor, sit amet sagittis elit pellentesque sit amet. Ut ut tellus sit amet mauris auctor feugiat sit amet ac nisi.
+	&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class="block-container media"&gt;
+	&lt;p class="block media-body w80"&gt;
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam elementum nulla id nisl hendrerit pellentesque. Sed vel purus id nunc fermentum consequat in cursus mi. Suspendisse bibendum gravida turpis, eget vehicula lacus iaculis eu. Donec consectetur malesuada dolor, nec congue magna viverra vitae. Aliquam accumsan justo tortor, sit amet sagittis elit pellentesque sit amet. Ut ut tellus sit amet mauris auctor feugiat sit amet ac nisi.
+	&lt;/p&gt;
+
+	&lt;div class="block media-object w20"&gt;
+		&lt;svg class="primary-color secondary-background svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" stroke="#909295" fill="#E3E4E5"&gt;
+			&lt;circle cx="50%" cy="50%" r="25%" /&gt;
+		&lt;/svg&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+			</pre>
+
+			<div class="text-info">
+				<p>You can also display the content in a block so you can have multiple of them inline. Typically used to give supporting reasons for a section. Often times there are multiple of these blocks grouped together as justification for a product or feature.</p>
+
+				<p>example: <a href="https://www.liferay.com/solutions/portals">What kind of portals can I create with Liferay?</a></p>
+			</div>
+
+			<div class="style-example">
+				<div class="block-container">
+					<div class="alt-text-color block media w33">
+						<div class="media-object">
+							<svg class="primary-color secondary-background svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" stroke="#909295" fill="#E3E4E5">
+								<circle cx="50%" cy="50%" r="25%" />
+							</svg>
+						</div>
+
+						<div class="media-body">
+							<h3>Enterprise ready</h3>
+
+							<p>Liferay is designed for scalability, reliability, and high performance -- both on-premises and in the cloud.</p>
+						</div>
+					</div>
+
+					<div class="alt-text-color block media w33">
+						<div class="media-object">
+							<svg class="primary-color secondary-background svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" stroke="#909295" fill="#E3E4E5">
+								<circle cx="50%" cy="50%" r="25%" />
+							</svg>
+						</div>
+
+						<div class="media-body">
+							<h3>Enterprise ready</h3>
+
+							<p>Liferay is designed for scalability, reliability, and high performance -- both on-premises and in the cloud.</p>
+						</div>
+					</div>
+
+					<div class="alt-text-color block media w33">
+						<div class="media-object">
+							<svg class="primary-color secondary-background svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" stroke="#909295" fill="#E3E4E5">
+								<circle cx="50%" cy="50%" r="25%" />
+							</svg>
+						</div>
+
+						<div class="media-body">
+							<h3>Enterprise ready</h3>
+
+							<p>Liferay is designed for scalability, reliability, and high performance -- both on-premises and in the cloud.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<pre>
+&lt;div class="block-container"&gt;
+	&lt;div class="alt-text-color block media w33"&gt;
+		&lt;div class="media-object"&gt;
+			&lt;svg class="primary-color secondary-background svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" stroke="#909295" fill="#E3E4E5"&gt;
+				&lt;circle cx="50%" cy="50%" r="25%" /&gt;
+			&lt;/svg&gt;
+		&lt;/div&gt;
+
+		&lt;div class="media-body"&gt;
+			&lt;h3&gt;Enterprise ready&lt;/h3&gt;
+
+			&lt;p&gt;Liferay is designed for scalability, reliability, and high performance -- both on-premises and in the cloud.&lt;/p&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+
+	&lt;div class="alt-text-color block media w33"&gt;
+		&lt;div class="media-object"&gt;
+			&lt;svg class="primary-color secondary-background svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" stroke="#909295" fill="#E3E4E5"&gt;
+				&lt;circle cx="50%" cy="50%" r="25%" /&gt;
+			&lt;/svg&gt;
+		&lt;/div&gt;
+
+		&lt;div class="media-body"&gt;
+			&lt;h3&gt;Enterprise ready&lt;/h3&gt;
+
+			&lt;p&gt;Liferay is designed for scalability, reliability, and high performance -- both on-premises and in the cloud.&lt;/p&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+
+	&lt;div class="alt-text-color block media w33"&gt;
+		&lt;div class="media-object"&gt;
+			&lt;svg class="primary-color secondary-background svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" stroke="#909295" fill="#E3E4E5"&gt;
+				&lt;circle cx="50%" cy="50%" r="25%" /&gt;
+			&lt;/svg&gt;
+		&lt;/div&gt;
+
+		&lt;div class="media-body"&gt;
+			&lt;h3&gt;Enterprise ready&lt;/h3&gt;
+
+			&lt;p&gt;Liferay is designed for scalability, reliability, and high performance -- both on-premises and in the cloud.&lt;/p&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+			</pre>
+		</div>
+
+		<div class="style-item" id="panelModule">
+			<h3 class="style-title">
+				Panel
+			</h3>
+
+			<div class="text-info">
+				Panels function similiar to cards. Consider replace current call-out boxes.
+			</div>
+
+			<div class="style-example">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Panel heading
+					</div>
+
+					<div class="panel-body">
+						Panel content
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							Panel title
+						</h3>
+					</div>
+
+					<div class="panel-body">
+						Panel content
+					</div>
+				</div>
+			</div>
+
+			<pre>
+&lt;div class="panel panel-default"&gt;
+	&lt;div class="panel-heading"&gt;Panel heading without title&lt;/div&gt;
+	&lt;div class="panel-body"&gt;
+		Panel content
+	&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="panel panel-default"&gt;
+	&lt;div class="panel-heading"&gt;
+		&lt;h3 class="panel-title"&gt;Panel title&lt;/h3&gt;
+	&lt;/div&gt;
+	&lt;div class="panel-body"&gt;
+		Panel content
+	&lt;/div&gt;
+&lt;/div&gt;
+			</pre>
+		</div>
+
+		<div class="style-item" id="selectionNavModule">
+			<h3 class="style-title">
+				Selection Nav
+			</h3>
+
+			<div class="text-info">
+				<p>example: the filtering navigation bar on <a href="http://www.liferay.com/documentation/additional-resources/whitepapers">white papers</a> and <a href="http://www.liferay.com/products/liferay-portal/stories">case studies</a>.
+				</p>
+
+				<p>This module is here in case we want to restyle them.</p>
+			</div>
+
+			<div class="style-example"></div>
+
+			<pre></pre>
+		</div>
+
+		<div class="style-item" id="statsGraphicModule">
+			<h3 class="style-title">
+				Stats Graphic
+			</h3>
+			<div class="text-info"></div>
+
+			<div class="style-example"></div>
+
+			<pre></pre>
+		</div>
+
+		<div class="style-item" id="quoteModule">
+			<h3 class="style-title">
+				Quote Section
+			</h3>
+
+			<div class="text-info">
+				<p>This section usually spans the width of the screen with large triangles on the background on either side of the section to frame the quote.</p>
+
+				<p>example: the Kerry Fullagar quote on <a href="http://www.liferay.com/solutions/portals">portals page</a>.</p>
+
+				<ul>Let's decide
+					<li>how many background triangles are on either side</li>
+					<li>how many variations of the quote section we want to have</li>
+					<li>mobile and tablet views</li>
+				</ul>
+
+				<p>example: case studies <a href="http://www.liferay.com/products/liferay-portal/stories/allianz-insurance">quotes section</a></p>
+			</div>
+
+			<div class="style-example">
+				<div class="quote-wrapper">
+					<div class="quote">
+						Mocha trifecta coffee cultivar at, aroma, robusta bar aroma in mocha. White skinny lungo seasonal shop turkish sit aroma id aroma. Doppio cortado crema, aged steamed as americano eu sweet ristretto.
+					</div>
+
+					<div class="quote-source">
+						<div class="quote-author">
+							Author
+						</div>
+
+						<div class="author-role">
+							Author Title
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<pre>
+&lt;div class=&quot;quote-wrapper&quot;&gt;
+	&lt;div class=&quot;quote&quot;&gt;
+		Mocha trifecta coffee cultivar at, aroma, robusta bar aroma in mocha.
+		White skinny lungo seasonal shop turkish sit aroma id aroma.
+		Doppio cortado crema, aged steamed as americano eu sweet ristretto.
+	&lt;/div&gt;
+	&lt;div class=&quot;quote-source&quot;&gt;
+		&lt;div class=&quot;quote-author&quot;&gt;
+			Author
+		&lt;/div&gt;
+		&lt;div class=&quot;author-role&quot;&gt;
+			Author Title
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+			</pre>
+		</div>
+
+		<div class="style-item" id="transitionsModule">
+			<h3 class="style-title">
+				Transitions
+			</h3>
+
+			<ul class="text-info">
+				<li>slide in from left & right</li>
+				<li>slide in from bottom</li>
+				<li>additional thoughts/preference?</li>
+			</ul>
+
+			<div class="style-example"></div>
+
+			<pre></pre>
+		</div>
+	</div>
+
+	<div class="style-section">
+		<h2 class="style-heading">Modules (Javascript)</h2>
+
+		<div class="style-item" id="carouselModule">
+			<h3 class="style-title">
+				Carousel
+			</h3>
+
+			<div class="text-info">
+				<small>We'll make concessions if we have to. shh!</small>
+				<ul>
+					<li>vertical carousel</li>
+					<li>case studies <a href="http://www.liferay.com/products/liferay-portal/stories/allianz-insurance">quick fact carousel</a></li>
+					<li>carousel banner <small>hopefully not</small></li>
+				</ul>
+			</div>
+
+			<div class="style-example"></div>
+
+			<pre></pre>
+		</div>
+
+		<div class="style-item" id="faqModule">
+			<h3 class="style-title">
+				FAQ
+			</h3>
+
+			<div class="text-info">
+				<p>example: <a href="https://www.liferay.com/community/liferay-projects/liferay-screens#article_1_14_55505271_3.7">screens</a></p>
+
+				<p>Test for: browser compatibility</p>
+			</div>
+
+			<div class="style-example"></div>
+
+			<pre></pre>
+		</div>
+
+		<div class="style-item" id="parallaxModule">
+			<h3 class="style-title">
+				Parallax
+			</h3>
+
+			<div class="text-info">
+				Rethink how best to achieve the parallax effect.
+			</div>
+
+			<div class="style-example"></div>
+
+			<pre></pre>
+		</div>
+
+		<div class="style-item" id="popUpModule">
+			<h3 class="style-title">
+				Pop-ups
+			</h3>
+
+			<ul class="text-info">
+				<li>Info/form pop-ups</li>
+				<li>Video pop-ups</li>
+				<li>Overlay color/opacity (middle ground for IE fallbacks)</li>
+			</ul>
+
+			<div class="style-example"></div>
+
+			<pre></pre>
+		</div>
+	</div>
+</body>

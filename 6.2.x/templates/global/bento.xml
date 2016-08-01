@@ -1,0 +1,253 @@
+
+<root available-locales="en_US" default-locale="en_US">
+	<dynamic-element dataType="string" indexType="keyword" localizable="true" name="block" readOnly="false" repeatable="true" required="false" showLabel="true" type="text" width="large">
+		<dynamic-element dataType="string" indexType="keyword" localizable="true" name="article_id" readOnly="false" repeatable="true" required="false" showLabel="true" type="text" width="large">
+			<meta-data locale="en_US">
+				<entry name="label">
+					<![CDATA[Embedded Article ID]]>
+				</entry>
+				<entry name="predefinedValue">
+					<![CDATA[]]>
+				</entry>
+				<entry name="tip">
+					<![CDATA[This field can be used to embed another article into the current block.]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element dataType="string" indexType="keyword" localizable="false" multiple="false" name="background_color" readOnly="false" repeatable="false" required="false" showLabel="true" type="select" width="">
+			<dynamic-element name="option4921" type="option" value="transparent-background">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[None]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<dynamic-element name="option4671" type="option" value="accent-background">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[Teal (accent color)]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<dynamic-element name="option4675" type="option" value="complementary-background">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[Orange (complementary color)]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<dynamic-element name="option4677" type="option" value="primary-background">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[Blue (primary color)]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<dynamic-element name="option4673" type="option" value="alt-primary-background">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[Blue (alternative primary color)]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<dynamic-element name="option4678" type="option" value="secondary-background">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[Dark Blue (secondary color)]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<dynamic-element name="option4674" type="option" value="alt-secondary-background">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[Dark Blue (alternative secondary color)]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<dynamic-element name="option4676" type="option" value="element-background">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[Light Gray (element color)]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<dynamic-element name="option4672" type="option" value="alt-font-background">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[Gray (alternative text color)]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<meta-data locale="en_US">
+				<entry name="label">
+					<![CDATA[Background Color]]>
+				</entry>
+				<entry name="predefinedValue">
+					<![CDATA[[""]]]>
+				</entry>
+				<entry name="tip">
+					<![CDATA[]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element dataType="document-library" fieldNamespace="ddm" indexType="keyword" localizable="true" name="media" readOnly="false" repeatable="true" required="false" showLabel="true" type="ddm-documentlibrary" width="">
+			<dynamic-element dataType="string" indexType="keyword" localizable="true" name="video_type" readOnly="false" repeatable="false" required="false" showLabel="true" type="text" width="small">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[Video Type]]>
+					</entry>
+					<entry name="predefinedValue">
+						<![CDATA[]]>
+					</entry>
+					<entry name="tip">
+						<![CDATA[Filling this in will tell the template this document is a video. The content should look like video/mp4 (or whatever file type it should be)]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<meta-data locale="en_US">
+				<entry name="label">
+					<![CDATA[Background Media]]>
+				</entry>
+				<entry name="predefinedValue">
+					<![CDATA[]]>
+				</entry>
+				<entry name="tip">
+					<![CDATA[Select a video or image to be displayed as the background of the current block. You can select multiple to allow for fallbacks.]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element dataType="string" indexType="keyword" localizable="false" multiple="false" name="width" readOnly="false" repeatable="false" required="false" showLabel="true" type="select" width="">
+			<dynamic-element name="option6106" type="option" value="w20">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[20%]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<dynamic-element name="option6107" type="option" value="w30">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[30%]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<dynamic-element name="option6108" type="option" value="w33">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[33%]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<dynamic-element name="option6109" type="option" value="w40">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[40%]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<dynamic-element name="option6110" type="option" value="w50">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[50%]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<dynamic-element name="option6111" type="option" value="w60">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[60%]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<dynamic-element name="option6112" type="option" value="w66">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[66%]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<dynamic-element name="option6113" type="option" value="w70">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[70%]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<dynamic-element name="option6114" type="option" value="w80">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[80%]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<dynamic-element name="option6115" type="option" value="w100">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[100%]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<meta-data locale="en_US">
+				<entry name="label">
+					<![CDATA[Width]]>
+				</entry>
+				<entry name="predefinedValue">
+					<![CDATA[["w100"]]]>
+				</entry>
+				<entry name="tip">
+					<![CDATA[]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element dataType="string" indexType="keyword" localizable="true" name="block_class" readOnly="false" repeatable="false" required="false" showLabel="true" type="text" width="large">
+			<meta-data locale="en_US">
+				<entry name="label">
+					<![CDATA[Block Class]]>
+				</entry>
+				<entry name="predefinedValue">
+					<![CDATA[]]>
+				</entry>
+				<entry name="tip">
+					<![CDATA[Insert custom css class names you want included on the block level.]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<meta-data locale="en_US">
+			<entry name="label">
+				<![CDATA[Block]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[This will create a new block which you can give a width and background to. You can also fill in the field with html attributes and it will be added into the tag. For example: id="myBlock" or data-attribute="example".]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
+	<dynamic-element dataType="string" indexType="keyword" localizable="true" name="article_class" readOnly="false" repeatable="false" required="false" showLabel="true" type="text" width="medium">
+		<meta-data locale="en_US">
+			<entry name="label">
+				<![CDATA[Article Class]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[Insert custom css class names you want included on the article level.]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
+	<dynamic-element dataType="string" indexType="keyword" localizable="true" name="css" readOnly="false" repeatable="false" required="false" showLabel="true" type="textarea" width="large">
+		<meta-data locale="en_US">
+			<entry name="label">
+				<![CDATA[CSS]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[Insert your custom css here.]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
+</root>

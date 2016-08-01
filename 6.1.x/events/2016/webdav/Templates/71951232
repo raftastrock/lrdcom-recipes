@@ -1,0 +1,133 @@
+<style>
+#message.error {
+	color: red;
+}
+#message.success {
+	color: green;
+}
+
+</style>
+
+
+#set ($ddl_records_local_service = $serviceLocator.findService("com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalService"))
+#set ($record_set_id = $getterUtil.getLong($record_set_id.data))
+#set ($records = $ddl_records_local_service.getRecords($record_set_id))
+
+
+## Loop Through records and place them in the correct place in the map
+#foreach ($record in $records)
+
+	<div>$record.getFieldValue("link_name"):   $record.getFieldValue("link_id") <input type=button data-recordid="$record.getRecordId()" value=Edit class="editbutton"></input></div>
+	
+	
+#end
+<div id="message">
+
+</div>
+
+
+
+
+#set ($ddl_records_local_service = $serviceLocator.findService("com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalService"))
+#set ($record_set_id = $getterUtil.getLong($record_set_id.data))
+#set ($roomrecords = $ddl_records_local_service.getRecords(69485640))
+
+<select id="room">
+## Loop Through records and place them in the correct place in the map
+#foreach ($roomrecord in $roomrecords)
+	<option value=$roomrecord.getUuid()> $roomrecord.getFieldValue("room_name") </option>
+#end
+</select>
+
+<input type=button value="Add Entry" id="addentry">
+
+<script>
+
+window.addEventListener("DOMContentLoaded", function() {
+
+	var roomselect = document.getElementById("room");
+	function editRecord(event) {
+		console.log("recordid" +this.dataset.recordid);
+		console.log("select" + roomselect.value)
+		updateRecord(this.dataset.recordid, roomselect.value);
+	}
+	var editButtons = document.querySelectorAll(".editbutton");
+	for (var i = 0; i < editButtons.length; i++) {
+		editButtons[i].addEventListener("click", editRecord);
+	}
+	var addbutton = document.getElementById("addentry");
+	addbutton.addEventListener("click", function(event) {
+		createRecord();
+	});
+});
+
+function updateRecord(recordId, newId) {
+	
+	  var cmdArray = [];
+	  cmdArray.push({
+	    					"/ddlrecord/update-record" : {
+							      "recordId": recordId,
+							      "displayIndex": 0,
+							      "fieldsMap": {
+							    	  "link_id": newId
+							       // "link_name": "test link",
+							       // "link_href": "test",
+							       // "link_id" : "navtest",
+							       // "link_order": 10
+							      },
+	  							  "mergeFields": false
+	    					}
+	  					});
+
+	  invokeJSON(cmdArray, " DDL Entry was edited");
+}
+
+function createRecord() {
+  var cmdArray = [];
+  cmdArray.push({
+    					"/ddlrecord/add-record" : {
+						      "groupId": 67510365,
+						      "recordSetId": $record_set_id,
+						      "displayIndex": 0,
+						      "fieldsMap": {
+						        "link_name": "test link",
+						        "link_href": "test",
+						        "link_id" : "navtest",
+						        "link_order": 10
+						      }
+						      
+    					}
+  					});
+ invokeJSON(cmdArray, " DDL Entry was created");   
+}
+  function invokeJSON(cmdArray, successMessage) {
+  var invokeURL = "https://www.liferay.com/api/jsonws/invoke?cmd=";
+  
+	var req = new XMLHttpRequest();
+	var messageDiv = document.getElementById("message");
+	req.onload = function () {
+		var events = JSON.parse(this.responseText);
+		if (!Array.isArray(events)) {
+			var message=events.exception ? events.exception: "Unknown error";
+			messageDiv.textContent = "ERROR: " + message;
+			messageDiv.classList.add("error");
+			messageDiv.classList.remove("succcess");
+		}
+		else {
+			messageDiv.textContent = "";
+			
+			messageDiv.textContent = events.length + successMessage;
+		
+			messageDiv.classList.add("success");
+			messageDiv.classList.remove("error");
+		}
+	};
+	
+	var ctx = "serviceContext.userId=66748356";
+	req.open('get', invokeURL + JSON.stringify(cmdArray) + "&p_auth=" + Liferay.authToken + "&"+ctx , true);
+	req.send();
+}
+
+
+
+</script>
